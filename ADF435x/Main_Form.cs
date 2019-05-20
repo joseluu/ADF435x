@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO.Ports;
+using System.IO;
 using System.Windows.Forms;
 using System.Threading;
 using CyUSB;
@@ -34,6 +36,11 @@ namespace ADF435x
         Spi session;
         Gpio g_session;
 
+        static String[] SerialPortList = null;
+        static SerialPort port;
+        static String CurrentSerialPort = null;
+        static int nFirmwareVersionNumber = -1;
+
         static int buffer_length = 1;
         static byte[] buffer = new byte[5];     // (Bits per register / 8) + 1
 
@@ -41,7 +48,8 @@ namespace ADF435x
 
         #region Global variables
 
-        bool protocol = false;                  // false = USB adapter, true = SDP
+        enum protocol_e  { USB_CY, SDP, D6 }; // default = false;                  // false = USB adapter, true = SDP
+        protocol_e protocol;
 
         double RFout, REFin, RFoutMax = 4400, RFoutMin = 34.375, REFinMax = 250, PFDMax = 32, OutputChannelSpacing, INT, MOD, FRAC;
 
@@ -489,7 +497,7 @@ namespace ADF435x
 
                 log("USB adapter board connected.");
                 ConnectDeviceButton.Enabled = false;
-                protocol = false;
+                protocol = protocol_e.USB_CY;
 
                 #region USB Delay
                 USBDelayBar.Visible = true;
@@ -553,7 +561,7 @@ namespace ADF435x
 
                 log("USB adapter board connected.");
                 ConnectDeviceButton.Enabled = false;
-                protocol = false;
+                protocol = protocol_e.USB_CY;
 
                 #region USB Delay
                 USBDelayBar.Visible = true;
@@ -659,7 +667,7 @@ namespace ADF435x
 
                 DeviceConnectionStatus.Text = "SDP board connected. Using " + sdp.ID1Connector.ToString(); ;
                 DeviceConnectionStatus.ForeColor = Color.Green;
-                protocol = true;
+                protocol = protocol_e.SDP;
                 log("SDP connected.");
 
                 sdp.newSpi(sdp.ID1Connector, 0, 32, false, false, false, 4000000, 0, out session);
@@ -686,6 +694,79 @@ namespace ADF435x
             }
         }
 
+        public bool InitializeSerial(String SerialPortName)
+        {
+            log("Attempting serial " + SerialPortName + " connection...");
+
+            if (port != null && port.IsOpen)
+                port.Close();
+
+            port = new SerialPort(SerialPortName, 57600);
+            String COMChecked = SerialPortName;
+
+            bool bOpenedByMe;
+
+            port.DtrEnable = true;
+            port.RtsEnable = true;
+
+            if (!port.IsOpen) {
+                try {
+                    port.Open();
+                    bOpenedByMe = true;
+                }
+                catch (Exception e) {
+                    return false;
+                }
+            } else {
+                bOpenedByMe = false;
+            }
+
+            port.DiscardInBuffer();
+            port.DiscardOutBuffer();
+
+            port.ReadTimeout = 500;
+            byte[] OutMessage = new byte[2];
+
+            OutMessage[0] = 0x8f;
+            OutMessage[1] = (byte)'v';
+
+            port.Write(OutMessage, 0, OutMessage.Length);
+
+            try {
+                nFirmwareVersionNumber = port.ReadByte();
+                log("D6 Firmware version:" + nFirmwareVersionNumber);
+                CurrentSerialPort = SerialPortName;
+                this.DeviceConnectionStatus.Text = "D6 connected Firmware version: " + nFirmwareVersionNumber;
+                return true;
+            }
+            catch (TimeoutException) {
+                // we try with the function 's'
+                OutMessage[1] = (byte)'s';
+                port.Write(OutMessage, 0, OutMessage.Length);
+
+                try {
+                    nFirmwareVersionNumber = port.ReadByte();
+                    int nFlush = port.ReadByte();
+                    nFlush = port.ReadByte();
+                    nFlush = port.ReadByte();
+
+                    CurrentSerialPort = SerialPortName;
+                    return true;
+                }
+                catch (TimeoutException) {
+                    if (bOpenedByMe)
+                        port.Close();
+                }
+            }
+            return false;
+        }
+
+        public void Connect_D6(string portName)
+        {
+            ConnectingLabel.Visible = true;
+            InitializeSerial(portName);
+            ConnectingLabel.Visible = false;
+        }
         #endregion
 
         #region Top Menu options
@@ -798,6 +879,44 @@ namespace ADF435x
                 Connect_CyUSB();
             else if (SDPSelector.Checked)
                 Connect_SDP();
+            else if (D6selector.Checked && SerialPortComboBox.Text.Length != 0)
+                Connect_D6(SerialPortComboBox.Text);
+        }
+
+        private void RefreshCOMPortList()
+        {
+            try {
+                SerialPortList = SerialPort.GetPortNames();
+                if (SerialPortList.Length > 0) {
+                    SerialPortComboBox.Items.Clear();
+                    SerialPortComboBox.Items.AddRange(SerialPortList);
+                }
+            }
+            catch (Exception) {
+                SerialPortComboBox.Items.Clear();
+            }
+        }
+
+        private void D6selector_CheckedChanged(object sender, EventArgs e)
+        {
+            if (D6selector.Checked) {
+                SerialPortComboBox.Visible = true;
+                ADF4351.Select();
+                protocol = protocol_e.D6;
+                RefreshCOMPortList();
+                for (int i=0;i< SerialPortList.Length;i++) {
+                    log("Detected serial port: " + SerialPortList[i]);
+                }
+            }
+            else 
+            {
+                SerialPortComboBox.Visible = false;
+            }
+        }
+
+        private void D6Picture_Click(object sender, EventArgs e)
+        {
+            D6selector.Checked = true;
         }
 
         private void SDPsPicture_Click(object sender, EventArgs e)
@@ -839,10 +958,9 @@ namespace ADF435x
             uint[] toWrite = new uint[1];
             int x = 1;                                          // for checking the result of .writeU32()
 
-            if (protocol)                                       // protocol: true = SDP, false = CyUSB
+            if (protocol == protocol_e.SDP)                                       // protocol: true = SDP, false = CyUSB
             {
-                if (session != null)
-                {
+                if (session != null) {
                     toWrite[0] = data;
 
                     //if (UseSPI_SEL_BOption.Checked)
@@ -860,14 +978,10 @@ namespace ADF435x
 
                     if (x == 0)
                         log("0x" + String.Format("{0:X}", data) + " written to device.");
-                }
-                else
+                } else
                     log("Writing failed.");
-            }
-            else
-            {
-                if (connectedDevice != null)
-                {
+            } else if (protocol == protocol_e.USB_CY) {
+                if (connectedDevice != null) {
                     for (int i = 0; i < 4; i++)
                         buffer[i] = (byte)(data >> (i * 8));
 
@@ -878,15 +992,31 @@ namespace ADF435x
 
                     if (XferSuccess)
                         log("0x" + String.Format("{0:X}", data) + " written to device.");
-                }
-                else
+                } else
                     log("Writing failed.");
+            } else if (protocol == protocol_e.D6) {
+                byte[] OutMessage = new byte[7];
+
+                OutMessage[0] = 0x8f;
+                OutMessage[1] = (byte)'i';
+                OutMessage[2] = 0; // 0->tracking gen, 1-> analyzer gen
+
+                for (int i = 3; i >=0; i--) {
+                    OutMessage[3 + i] = (byte)(data >> (i * 8));
+                }
+                try {
+                    port.Write(OutMessage, 0, OutMessage.Length);
+                }
+                catch (TimeoutException) {
+                    log("Writing to serial port failed.");
+                    return;
+                }
+                log("0x" + String.Format("{0:X}", data) + " written to device.");
             }
         }
-
         #endregion
 
-        #region Change Part stuff
+            #region Change Part stuff
 
         private void resetToDefaultValuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1864,9 +1994,14 @@ namespace ADF435x
             }
         }
 
+        private void ConnectionSelectorGroup_Enter(object sender, EventArgs e)
+        {
+
+        }
+
         private void FlashSDPLEDButton_Click(object sender, EventArgs e)
         {
-            if ((protocol) & (session != null))
+            if ((protocol == protocol_e.SDP) & (session != null))
                 sdp.flashLed1();
         }
         #endregion

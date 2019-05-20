@@ -62,6 +62,9 @@
             this.ADF4351 = new System.Windows.Forms.RadioButton();
             this.ADF4350 = new System.Windows.Forms.RadioButton();
             this.ConnectionSelectorGroup = new System.Windows.Forms.GroupBox();
+            this.SerialPortComboBox = new System.Windows.Forms.ComboBox();
+            this.D6selector = new System.Windows.Forms.RadioButton();
+            this.D6Picture = new System.Windows.Forms.PictureBox();
             this.USBDelayBar = new System.Windows.Forms.ProgressBar();
             this.SDPsPicture = new System.Windows.Forms.PictureBox();
             this.USBadapterPicture = new System.Windows.Forms.PictureBox();
@@ -218,6 +221,19 @@
             this.R1HexBox = new System.Windows.Forms.TextBox();
             this.R0HexBox = new System.Windows.Forms.TextBox();
             this.SweepHopTab = new System.Windows.Forms.TabPage();
+            this.RandomHopGroup = new System.Windows.Forms.GroupBox();
+            this.label80 = new System.Windows.Forms.Label();
+            this.RandomCurrentBox = new System.Windows.Forms.NumericUpDown();
+            this.RandomTimeDelayBox = new System.Windows.Forms.NumericUpDown();
+            this.RandomMinStepBox = new System.Windows.Forms.NumericUpDown();
+            this.RandomStopBox = new System.Windows.Forms.NumericUpDown();
+            this.RandomStartBox = new System.Windows.Forms.NumericUpDown();
+            this.label79 = new System.Windows.Forms.Label();
+            this.RandomStopButton = new System.Windows.Forms.Button();
+            this.RandomStartButton = new System.Windows.Forms.Button();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label77 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
             this.HopGroupBox = new System.Windows.Forms.GroupBox();
             this.label44 = new System.Windows.Forms.Label();
@@ -235,6 +251,7 @@
             this.time_remaining = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
             this.SweepPercentage = new System.Windows.Forms.Label();
+            this.SweepSpacingBox = new System.Windows.Forms.TextBox();
             this.SweepProgress = new System.Windows.Forms.ProgressBar();
             this.label43 = new System.Windows.Forms.Label();
             this.SweepCurrent = new System.Windows.Forms.TextBox();
@@ -324,26 +341,13 @@
             this.WarningsLabel = new System.Windows.Forms.Label();
             this.label75 = new System.Windows.Forms.Label();
             this.SoftwareVersionLabel = new System.Windows.Forms.Label();
-            this.RandomHopGroup = new System.Windows.Forms.GroupBox();
-            this.RandomStartBox = new System.Windows.Forms.NumericUpDown();
-            this.RandomStopBox = new System.Windows.Forms.NumericUpDown();
-            this.label76 = new System.Windows.Forms.Label();
-            this.label77 = new System.Windows.Forms.Label();
-            this.RandomStartButton = new System.Windows.Forms.Button();
-            this.RandomStopButton = new System.Windows.Forms.Button();
-            this.SweepSpacingBox = new System.Windows.Forms.TextBox();
-            this.RandomMinStepBox = new System.Windows.Forms.NumericUpDown();
-            this.label78 = new System.Windows.Forms.Label();
-            this.RandomTimeDelayBox = new System.Windows.Forms.NumericUpDown();
-            this.label79 = new System.Windows.Forms.Label();
-            this.label80 = new System.Windows.Forms.Label();
-            this.RandomCurrentBox = new System.Windows.Forms.NumericUpDown();
             this.MainFormStatusBar.SuspendLayout();
             this.MainFormMenu.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.DeviceSelectionTab.SuspendLayout();
             this.DeviceSelectorGroup.SuspendLayout();
             this.ConnectionSelectorGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.D6Picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SDPsPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.USBadapterPicture)).BeginInit();
             this.MainControlsTab.SuspendLayout();
@@ -372,6 +376,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.ChannelUpDownButton)).BeginInit();
             this.RegistersTab.SuspendLayout();
             this.SweepHopTab.SuspendLayout();
+            this.RandomHopGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RandomCurrentBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RandomTimeDelayBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RandomMinStepBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RandomStopBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RandomStartBox)).BeginInit();
             this.HopGroupBox.SuspendLayout();
             this.SweepGroupBox.SuspendLayout();
             this.OtherFunctionsTab.SuspendLayout();
@@ -386,12 +396,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DeviceWarningIcon)).BeginInit();
             this.WarningsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WarningsIcon)).BeginInit();
-            this.RandomHopGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.RandomStartBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RandomStopBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RandomMinStepBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RandomTimeDelayBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RandomCurrentBox)).BeginInit();
             this.SuspendLayout();
             // 
             // MainFormStatusBar
@@ -491,7 +495,7 @@
             this.advancedToolStripMenuItem,
             this.enableEventLogToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // resetToDefaultValuesToolStripMenuItem
@@ -647,7 +651,7 @@
             this.DeviceSelectorGroup.Controls.Add(this.ADF4350);
             this.DeviceSelectorGroup.Location = new System.Drawing.Point(36, 39);
             this.DeviceSelectorGroup.Name = "DeviceSelectorGroup";
-            this.DeviceSelectorGroup.Size = new System.Drawing.Size(413, 293);
+            this.DeviceSelectorGroup.Size = new System.Drawing.Size(173, 293);
             this.DeviceSelectorGroup.TabIndex = 0;
             this.DeviceSelectorGroup.TabStop = false;
             this.DeviceSelectorGroup.Text = "Choose a device to evaluate";
@@ -655,7 +659,7 @@
             // ADF4351
             // 
             this.ADF4351.AutoSize = true;
-            this.ADF4351.Location = new System.Drawing.Point(171, 151);
+            this.ADF4351.Location = new System.Drawing.Point(42, 142);
             this.ADF4351.Name = "ADF4351";
             this.ADF4351.Size = new System.Drawing.Size(70, 17);
             this.ADF4351.TabIndex = 1;
@@ -666,7 +670,7 @@
             // ADF4350
             // 
             this.ADF4350.AutoSize = true;
-            this.ADF4350.Location = new System.Drawing.Point(171, 124);
+            this.ADF4350.Location = new System.Drawing.Point(42, 115);
             this.ADF4350.Name = "ADF4350";
             this.ADF4350.Size = new System.Drawing.Size(70, 17);
             this.ADF4350.TabIndex = 1;
@@ -677,6 +681,9 @@
             // ConnectionSelectorGroup
             // 
             this.ConnectionSelectorGroup.BackColor = System.Drawing.Color.Transparent;
+            this.ConnectionSelectorGroup.Controls.Add(this.SerialPortComboBox);
+            this.ConnectionSelectorGroup.Controls.Add(this.D6selector);
+            this.ConnectionSelectorGroup.Controls.Add(this.D6Picture);
             this.ConnectionSelectorGroup.Controls.Add(this.USBDelayBar);
             this.ConnectionSelectorGroup.Controls.Add(this.SDPsPicture);
             this.ConnectionSelectorGroup.Controls.Add(this.USBadapterPicture);
@@ -684,16 +691,50 @@
             this.ConnectionSelectorGroup.Controls.Add(this.ConnectDeviceButton);
             this.ConnectionSelectorGroup.Controls.Add(this.SDPSelector);
             this.ConnectionSelectorGroup.Controls.Add(this.ConnectingLabel);
-            this.ConnectionSelectorGroup.Location = new System.Drawing.Point(480, 36);
+            this.ConnectionSelectorGroup.Location = new System.Drawing.Point(232, 36);
             this.ConnectionSelectorGroup.Name = "ConnectionSelectorGroup";
-            this.ConnectionSelectorGroup.Size = new System.Drawing.Size(473, 296);
+            this.ConnectionSelectorGroup.Size = new System.Drawing.Size(721, 296);
             this.ConnectionSelectorGroup.TabIndex = 1;
             this.ConnectionSelectorGroup.TabStop = false;
             this.ConnectionSelectorGroup.Text = "Choose connection method";
+            this.ConnectionSelectorGroup.Enter += new System.EventHandler(this.ConnectionSelectorGroup_Enter);
+            // 
+            // SerialPortComboBox
+            // 
+            this.SerialPortComboBox.FormattingEnabled = true;
+            this.SerialPortComboBox.Location = new System.Drawing.Point(40, 214);
+            this.SerialPortComboBox.Name = "SerialPortComboBox";
+            this.SerialPortComboBox.Size = new System.Drawing.Size(121, 21);
+            this.SerialPortComboBox.TabIndex = 10;
+            this.SerialPortComboBox.Visible = false;
+            // 
+            // D6selector
+            // 
+            this.D6selector.AutoSize = true;
+            this.D6selector.Location = new System.Drawing.Point(88, 179);
+            this.D6selector.Name = "D6selector";
+            this.D6selector.Size = new System.Drawing.Size(117, 17);
+            this.D6selector.TabIndex = 9;
+            this.D6selector.TabStop = true;
+            this.D6selector.Text = "D6 simple spectrum";
+            this.D6selector.UseVisualStyleBackColor = true;
+            this.D6selector.CheckedChanged += new System.EventHandler(this.D6selector_CheckedChanged);
+            // 
+            // D6Picture
+            // 
+            this.D6Picture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.D6Picture.Image = ((System.Drawing.Image)(resources.GetObject("D6Picture.Image")));
+            this.D6Picture.Location = new System.Drawing.Point(40, 38);
+            this.D6Picture.Name = "D6Picture";
+            this.D6Picture.Size = new System.Drawing.Size(204, 135);
+            this.D6Picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.D6Picture.TabIndex = 8;
+            this.D6Picture.TabStop = false;
+            this.D6Picture.Click += new System.EventHandler(this.D6Picture_Click);
             // 
             // USBDelayBar
             // 
-            this.USBDelayBar.Location = new System.Drawing.Point(8, 267);
+            this.USBDelayBar.Location = new System.Drawing.Point(350, 251);
             this.USBDelayBar.Name = "USBDelayBar";
             this.USBDelayBar.Size = new System.Drawing.Size(151, 23);
             this.USBDelayBar.TabIndex = 7;
@@ -703,7 +744,7 @@
             // 
             this.SDPsPicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SDPsPicture.Image = ((System.Drawing.Image)(resources.GetObject("SDPsPicture.Image")));
-            this.SDPsPicture.Location = new System.Drawing.Point(251, 38);
+            this.SDPsPicture.Location = new System.Drawing.Point(488, 38);
             this.SDPsPicture.Name = "SDPsPicture";
             this.SDPsPicture.Size = new System.Drawing.Size(200, 135);
             this.SDPsPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -715,7 +756,7 @@
             // 
             this.USBadapterPicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.USBadapterPicture.Image = ((System.Drawing.Image)(resources.GetObject("USBadapterPicture.Image")));
-            this.USBadapterPicture.Location = new System.Drawing.Point(24, 38);
+            this.USBadapterPicture.Location = new System.Drawing.Point(266, 38);
             this.USBadapterPicture.Name = "USBadapterPicture";
             this.USBadapterPicture.Size = new System.Drawing.Size(204, 135);
             this.USBadapterPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -726,7 +767,7 @@
             // USBselector
             // 
             this.USBselector.AutoSize = true;
-            this.USBselector.Location = new System.Drawing.Point(70, 179);
+            this.USBselector.Location = new System.Drawing.Point(307, 179);
             this.USBselector.Name = "USBselector";
             this.USBselector.Size = new System.Drawing.Size(113, 17);
             this.USBselector.TabIndex = 0;
@@ -736,7 +777,7 @@
             // 
             // ConnectDeviceButton
             // 
-            this.ConnectDeviceButton.Location = new System.Drawing.Point(191, 225);
+            this.ConnectDeviceButton.Location = new System.Drawing.Point(266, 202);
             this.ConnectDeviceButton.Name = "ConnectDeviceButton";
             this.ConnectDeviceButton.Size = new System.Drawing.Size(75, 47);
             this.ConnectDeviceButton.TabIndex = 2;
@@ -747,7 +788,7 @@
             // SDPSelector
             // 
             this.SDPSelector.AutoSize = true;
-            this.SDPSelector.Location = new System.Drawing.Point(295, 179);
+            this.SDPSelector.Location = new System.Drawing.Point(532, 179);
             this.SDPSelector.Name = "SDPSelector";
             this.SDPSelector.Size = new System.Drawing.Size(112, 17);
             this.SDPSelector.TabIndex = 1;
@@ -759,7 +800,7 @@
             // 
             this.ConnectingLabel.AutoSize = true;
             this.ConnectingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConnectingLabel.Location = new System.Drawing.Point(20, 244);
+            this.ConnectingLabel.Location = new System.Drawing.Point(355, 214);
             this.ConnectingLabel.Name = "ConnectingLabel";
             this.ConnectingLabel.Size = new System.Drawing.Size(115, 20);
             this.ConnectingLabel.TabIndex = 3;
@@ -1010,7 +1051,7 @@
             this.BSCWarning2Icon.TabIndex = 13;
             this.BSCWarning2Icon.TabStop = false;
             this.WarningTooltip.SetToolTip(this.BSCWarning2Icon, "Band Select Clock Frequency too high. Reduce to below 125 kHz or set Band Select " +
-                    "Clock Mode high.");
+        "Clock Mode high.");
             this.BSCWarning2Icon.Visible = false;
             // 
             // BandSelectClockAutosetBox
@@ -1703,8 +1744,8 @@
             this.RFWarningIcon.TabIndex = 13;
             this.RFWarningIcon.TabStop = false;
             this.WarningTooltip.SetToolTip(this.RFWarningIcon, "ADF4350: Minimum RF frequency = 137.5 MHz\r\nADF4350: Maximum RF frequency = 4400 M" +
-                    "Hz\r\n\r\nADF4351: Minimum RF frequency = 34.375 MHz\r\nADF4351: Maximum RF frequency " +
-                    "= 4400 MHz");
+        "Hz\r\n\r\nADF4351: Minimum RF frequency = 34.375 MHz\r\nADF4351: Maximum RF frequency " +
+        "= 4400 MHz");
             this.RFWarningIcon.Visible = false;
             // 
             // ReferenceFrequencyWarningIcon
@@ -1741,7 +1782,7 @@
             this.PrescalerWarningIcon.TabIndex = 13;
             this.PrescalerWarningIcon.TabStop = false;
             this.WarningTooltip.SetToolTip(this.PrescalerWarningIcon, "Prescaler input frequency too high.\r\n\r\nMaximum prescaler input for 4/5:\r\nADF4350 " +
-                    "= 3000 MHz.\r\nADF4351 = 3600 MHz.");
+        "= 3000 MHz.\r\nADF4351 = 3600 MHz.");
             this.PrescalerWarningIcon.Visible = false;
             // 
             // PhaseValueBox
@@ -2352,7 +2393,7 @@
             this.label4.Size = new System.Drawing.Size(168, 64);
             this.label4.TabIndex = 5;
             this.label4.Text = "Reference frequency and\r\nchannel spacing should be\r\nset manually before using \r\nt" +
-                "hese functions.";
+    "hese functions.";
             // 
             // UpdateWithoutWriteButton
             // 
@@ -2564,6 +2605,196 @@
             this.SweepHopTab.Text = "Sweep and Hop";
             this.SweepHopTab.UseVisualStyleBackColor = true;
             // 
+            // RandomHopGroup
+            // 
+            this.RandomHopGroup.Controls.Add(this.label80);
+            this.RandomHopGroup.Controls.Add(this.RandomCurrentBox);
+            this.RandomHopGroup.Controls.Add(this.RandomTimeDelayBox);
+            this.RandomHopGroup.Controls.Add(this.RandomMinStepBox);
+            this.RandomHopGroup.Controls.Add(this.RandomStopBox);
+            this.RandomHopGroup.Controls.Add(this.RandomStartBox);
+            this.RandomHopGroup.Controls.Add(this.label79);
+            this.RandomHopGroup.Controls.Add(this.RandomStopButton);
+            this.RandomHopGroup.Controls.Add(this.RandomStartButton);
+            this.RandomHopGroup.Controls.Add(this.label78);
+            this.RandomHopGroup.Controls.Add(this.label77);
+            this.RandomHopGroup.Controls.Add(this.label76);
+            this.RandomHopGroup.Location = new System.Drawing.Point(623, 29);
+            this.RandomHopGroup.Name = "RandomHopGroup";
+            this.RandomHopGroup.Size = new System.Drawing.Size(196, 231);
+            this.RandomHopGroup.TabIndex = 16;
+            this.RandomHopGroup.TabStop = false;
+            this.RandomHopGroup.Text = "Random Hop";
+            // 
+            // label80
+            // 
+            this.label80.AutoSize = true;
+            this.label80.Location = new System.Drawing.Point(26, 142);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(75, 13);
+            this.label80.TabIndex = 11;
+            this.label80.Text = "Current (MHz):";
+            // 
+            // RandomCurrentBox
+            // 
+            this.RandomCurrentBox.DecimalPlaces = 3;
+            this.RandomCurrentBox.Enabled = false;
+            this.RandomCurrentBox.Location = new System.Drawing.Point(104, 138);
+            this.RandomCurrentBox.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.RandomCurrentBox.Name = "RandomCurrentBox";
+            this.RandomCurrentBox.ReadOnly = true;
+            this.RandomCurrentBox.Size = new System.Drawing.Size(81, 20);
+            this.RandomCurrentBox.TabIndex = 8;
+            this.RandomCurrentBox.TabStop = false;
+            this.RandomCurrentBox.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // RandomTimeDelayBox
+            // 
+            this.RandomTimeDelayBox.DecimalPlaces = 3;
+            this.RandomTimeDelayBox.Location = new System.Drawing.Point(104, 104);
+            this.RandomTimeDelayBox.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.RandomTimeDelayBox.Name = "RandomTimeDelayBox";
+            this.RandomTimeDelayBox.Size = new System.Drawing.Size(81, 20);
+            this.RandomTimeDelayBox.TabIndex = 8;
+            this.RandomTimeDelayBox.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // RandomMinStepBox
+            // 
+            this.RandomMinStepBox.DecimalPlaces = 3;
+            this.RandomMinStepBox.Location = new System.Drawing.Point(104, 78);
+            this.RandomMinStepBox.Maximum = new decimal(new int[] {
+            4365,
+            0,
+            0,
+            0});
+            this.RandomMinStepBox.Name = "RandomMinStepBox";
+            this.RandomMinStepBox.Size = new System.Drawing.Size(81, 20);
+            this.RandomMinStepBox.TabIndex = 4;
+            this.RandomMinStepBox.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // RandomStopBox
+            // 
+            this.RandomStopBox.DecimalPlaces = 3;
+            this.RandomStopBox.Location = new System.Drawing.Point(104, 52);
+            this.RandomStopBox.Maximum = new decimal(new int[] {
+            4400,
+            0,
+            0,
+            0});
+            this.RandomStopBox.Minimum = new decimal(new int[] {
+            35,
+            0,
+            0,
+            0});
+            this.RandomStopBox.Name = "RandomStopBox";
+            this.RandomStopBox.Size = new System.Drawing.Size(81, 20);
+            this.RandomStopBox.TabIndex = 2;
+            this.RandomStopBox.Value = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            // 
+            // RandomStartBox
+            // 
+            this.RandomStartBox.DecimalPlaces = 3;
+            this.RandomStartBox.Location = new System.Drawing.Point(104, 26);
+            this.RandomStartBox.Maximum = new decimal(new int[] {
+            4400,
+            0,
+            0,
+            0});
+            this.RandomStartBox.Minimum = new decimal(new int[] {
+            35,
+            0,
+            0,
+            0});
+            this.RandomStartBox.Name = "RandomStartBox";
+            this.RandomStartBox.Size = new System.Drawing.Size(81, 20);
+            this.RandomStartBox.TabIndex = 0;
+            this.RandomStartBox.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Location = new System.Drawing.Point(16, 108);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(85, 13);
+            this.label79.TabIndex = 7;
+            this.label79.Text = "Time Delay (ms):";
+            // 
+            // RandomStopButton
+            // 
+            this.RandomStopButton.Enabled = false;
+            this.RandomStopButton.Location = new System.Drawing.Point(104, 179);
+            this.RandomStopButton.Name = "RandomStopButton";
+            this.RandomStopButton.Size = new System.Drawing.Size(76, 34);
+            this.RandomStopButton.TabIndex = 12;
+            this.RandomStopButton.Text = "Stop";
+            this.RandomStopButton.UseVisualStyleBackColor = true;
+            this.RandomStopButton.Click += new System.EventHandler(this.RandomStopButton_Click);
+            // 
+            // RandomStartButton
+            // 
+            this.RandomStartButton.Location = new System.Drawing.Point(16, 179);
+            this.RandomStartButton.Name = "RandomStartButton";
+            this.RandomStartButton.Size = new System.Drawing.Size(76, 34);
+            this.RandomStartButton.TabIndex = 10;
+            this.RandomStartButton.Text = "Start";
+            this.RandomStartButton.UseVisualStyleBackColor = true;
+            this.RandomStartButton.Click += new System.EventHandler(this.RandomStartButton_Click);
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(17, 82);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(84, 13);
+            this.label78.TabIndex = 5;
+            this.label78.Text = "Min. step (MHz):";
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(11, 56);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(90, 13);
+            this.label77.TabIndex = 5;
+            this.label77.Text = "Stop Freq. (MHz):";
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(11, 30);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(90, 13);
+            this.label76.TabIndex = 4;
+            this.label76.Text = "Start Freq. (MHz):";
+            // 
             // label73
             // 
             this.label73.AutoSize = true;
@@ -2749,6 +2980,14 @@
             this.SweepPercentage.Size = new System.Drawing.Size(21, 13);
             this.SweepPercentage.TabIndex = 13;
             this.SweepPercentage.Text = "0%";
+            // 
+            // SweepSpacingBox
+            // 
+            this.SweepSpacingBox.Location = new System.Drawing.Point(99, 78);
+            this.SweepSpacingBox.Name = "SweepSpacingBox";
+            this.SweepSpacingBox.Size = new System.Drawing.Size(81, 20);
+            this.SweepSpacingBox.TabIndex = 2;
+            this.SweepSpacingBox.Text = "1";
             // 
             // SweepProgress
             // 
@@ -2973,7 +3212,7 @@
             this.label36.Size = new System.Drawing.Size(238, 39);
             this.label36.TabIndex = 26;
             this.label36.Text = "For readback, PLL Testmodes must be set to\r\nREADBACK to MUXOUT and R46 on evaluat" +
-                "ion\r\nboard must be 0r.";
+    "ion\r\nboard must be 0r.";
             // 
             // ReadSelBox
             // 
@@ -3719,204 +3958,6 @@
             this.SoftwareVersionLabel.TabIndex = 1;
             this.SoftwareVersionLabel.Text = "1.2.3";
             // 
-            // RandomHopGroup
-            // 
-            this.RandomHopGroup.Controls.Add(this.label80);
-            this.RandomHopGroup.Controls.Add(this.RandomCurrentBox);
-            this.RandomHopGroup.Controls.Add(this.RandomTimeDelayBox);
-            this.RandomHopGroup.Controls.Add(this.RandomMinStepBox);
-            this.RandomHopGroup.Controls.Add(this.RandomStopBox);
-            this.RandomHopGroup.Controls.Add(this.RandomStartBox);
-            this.RandomHopGroup.Controls.Add(this.label79);
-            this.RandomHopGroup.Controls.Add(this.RandomStopButton);
-            this.RandomHopGroup.Controls.Add(this.RandomStartButton);
-            this.RandomHopGroup.Controls.Add(this.label78);
-            this.RandomHopGroup.Controls.Add(this.label77);
-            this.RandomHopGroup.Controls.Add(this.label76);
-            this.RandomHopGroup.Location = new System.Drawing.Point(623, 29);
-            this.RandomHopGroup.Name = "RandomHopGroup";
-            this.RandomHopGroup.Size = new System.Drawing.Size(196, 231);
-            this.RandomHopGroup.TabIndex = 16;
-            this.RandomHopGroup.TabStop = false;
-            this.RandomHopGroup.Text = "Random Hop";
-            // 
-            // RandomStartBox
-            // 
-            this.RandomStartBox.DecimalPlaces = 3;
-            this.RandomStartBox.Location = new System.Drawing.Point(104, 26);
-            this.RandomStartBox.Maximum = new decimal(new int[] {
-            4400,
-            0,
-            0,
-            0});
-            this.RandomStartBox.Minimum = new decimal(new int[] {
-            35,
-            0,
-            0,
-            0});
-            this.RandomStartBox.Name = "RandomStartBox";
-            this.RandomStartBox.Size = new System.Drawing.Size(81, 20);
-            this.RandomStartBox.TabIndex = 0;
-            this.RandomStartBox.Value = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            // 
-            // RandomStopBox
-            // 
-            this.RandomStopBox.DecimalPlaces = 3;
-            this.RandomStopBox.Location = new System.Drawing.Point(104, 52);
-            this.RandomStopBox.Maximum = new decimal(new int[] {
-            4400,
-            0,
-            0,
-            0});
-            this.RandomStopBox.Minimum = new decimal(new int[] {
-            35,
-            0,
-            0,
-            0});
-            this.RandomStopBox.Name = "RandomStopBox";
-            this.RandomStopBox.Size = new System.Drawing.Size(81, 20);
-            this.RandomStopBox.TabIndex = 2;
-            this.RandomStopBox.Value = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            // 
-            // label76
-            // 
-            this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(11, 30);
-            this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(90, 13);
-            this.label76.TabIndex = 4;
-            this.label76.Text = "Start Freq. (MHz):";
-            // 
-            // label77
-            // 
-            this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(11, 56);
-            this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(90, 13);
-            this.label77.TabIndex = 5;
-            this.label77.Text = "Stop Freq. (MHz):";
-            // 
-            // RandomStartButton
-            // 
-            this.RandomStartButton.Location = new System.Drawing.Point(16, 179);
-            this.RandomStartButton.Name = "RandomStartButton";
-            this.RandomStartButton.Size = new System.Drawing.Size(76, 34);
-            this.RandomStartButton.TabIndex = 10;
-            this.RandomStartButton.Text = "Start";
-            this.RandomStartButton.UseVisualStyleBackColor = true;
-            this.RandomStartButton.Click += new System.EventHandler(this.RandomStartButton_Click);
-            // 
-            // RandomStopButton
-            // 
-            this.RandomStopButton.Enabled = false;
-            this.RandomStopButton.Location = new System.Drawing.Point(104, 179);
-            this.RandomStopButton.Name = "RandomStopButton";
-            this.RandomStopButton.Size = new System.Drawing.Size(76, 34);
-            this.RandomStopButton.TabIndex = 12;
-            this.RandomStopButton.Text = "Stop";
-            this.RandomStopButton.UseVisualStyleBackColor = true;
-            this.RandomStopButton.Click += new System.EventHandler(this.RandomStopButton_Click);
-            // 
-            // SweepSpacingBox
-            // 
-            this.SweepSpacingBox.Location = new System.Drawing.Point(99, 78);
-            this.SweepSpacingBox.Name = "SweepSpacingBox";
-            this.SweepSpacingBox.Size = new System.Drawing.Size(81, 20);
-            this.SweepSpacingBox.TabIndex = 2;
-            this.SweepSpacingBox.Text = "1";
-            // 
-            // RandomMinStepBox
-            // 
-            this.RandomMinStepBox.DecimalPlaces = 3;
-            this.RandomMinStepBox.Location = new System.Drawing.Point(104, 78);
-            this.RandomMinStepBox.Maximum = new decimal(new int[] {
-            4365,
-            0,
-            0,
-            0});
-            this.RandomMinStepBox.Name = "RandomMinStepBox";
-            this.RandomMinStepBox.Size = new System.Drawing.Size(81, 20);
-            this.RandomMinStepBox.TabIndex = 4;
-            this.RandomMinStepBox.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
-            // label78
-            // 
-            this.label78.AutoSize = true;
-            this.label78.Location = new System.Drawing.Point(17, 82);
-            this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(84, 13);
-            this.label78.TabIndex = 5;
-            this.label78.Text = "Min. step (MHz):";
-            // 
-            // RandomTimeDelayBox
-            // 
-            this.RandomTimeDelayBox.DecimalPlaces = 3;
-            this.RandomTimeDelayBox.Location = new System.Drawing.Point(104, 104);
-            this.RandomTimeDelayBox.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.RandomTimeDelayBox.Name = "RandomTimeDelayBox";
-            this.RandomTimeDelayBox.Size = new System.Drawing.Size(81, 20);
-            this.RandomTimeDelayBox.TabIndex = 8;
-            this.RandomTimeDelayBox.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // label79
-            // 
-            this.label79.AutoSize = true;
-            this.label79.Location = new System.Drawing.Point(16, 108);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(85, 13);
-            this.label79.TabIndex = 7;
-            this.label79.Text = "Time Delay (ms):";
-            // 
-            // label80
-            // 
-            this.label80.AutoSize = true;
-            this.label80.Location = new System.Drawing.Point(26, 142);
-            this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(75, 13);
-            this.label80.TabIndex = 11;
-            this.label80.Text = "Current (MHz):";
-            // 
-            // RandomCurrentBox
-            // 
-            this.RandomCurrentBox.DecimalPlaces = 3;
-            this.RandomCurrentBox.Enabled = false;
-            this.RandomCurrentBox.Location = new System.Drawing.Point(104, 138);
-            this.RandomCurrentBox.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.RandomCurrentBox.Name = "RandomCurrentBox";
-            this.RandomCurrentBox.ReadOnly = true;
-            this.RandomCurrentBox.Size = new System.Drawing.Size(81, 20);
-            this.RandomCurrentBox.TabIndex = 8;
-            this.RandomCurrentBox.TabStop = false;
-            this.RandomCurrentBox.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3953,6 +3994,7 @@
             this.DeviceSelectorGroup.PerformLayout();
             this.ConnectionSelectorGroup.ResumeLayout(false);
             this.ConnectionSelectorGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.D6Picture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SDPsPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.USBadapterPicture)).EndInit();
             this.MainControlsTab.ResumeLayout(false);
@@ -3989,6 +4031,13 @@
             this.RegistersTab.PerformLayout();
             this.SweepHopTab.ResumeLayout(false);
             this.SweepHopTab.PerformLayout();
+            this.RandomHopGroup.ResumeLayout(false);
+            this.RandomHopGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RandomCurrentBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RandomTimeDelayBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RandomMinStepBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RandomStopBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RandomStartBox)).EndInit();
             this.HopGroupBox.ResumeLayout(false);
             this.HopGroupBox.PerformLayout();
             this.SweepGroupBox.ResumeLayout(false);
@@ -4011,13 +4060,6 @@
             this.WarningsPanel.ResumeLayout(false);
             this.WarningsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WarningsIcon)).EndInit();
-            this.RandomHopGroup.ResumeLayout(false);
-            this.RandomHopGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.RandomStartBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RandomStopBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RandomMinStepBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RandomTimeDelayBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RandomCurrentBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4333,6 +4375,9 @@
         private System.Windows.Forms.NumericUpDown RandomCurrentBox;
         private System.Windows.Forms.NumericUpDown RandomTimeDelayBox;
         private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.RadioButton D6selector;
+        private System.Windows.Forms.PictureBox D6Picture;
+        private System.Windows.Forms.ComboBox SerialPortComboBox;
     }
 }
 
